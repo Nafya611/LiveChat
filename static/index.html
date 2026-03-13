@@ -288,15 +288,28 @@
         try {
             // 1. Get Microphone
             status.textContent = "Requesting Mic...";
-            mediaStream = await navigator.mediaDevices.getUserMedia({
-                audio: {
-                    sampleRate: 16000,
-                    channelCount: 1,
-                    echoCancellation: true, // PREVENT ECHO
-                    noiseSuppression: true,
-                    autoGainControl: true
+            
+            // Check if we already have permission before trying, or handle error gracefully
+            try {
+                mediaStream = await navigator.mediaDevices.getUserMedia({
+                    audio: {
+                        sampleRate: 16000,
+                        channelCount: 1,
+                        echoCancellation: true, // PREVENT ECHO
+                        noiseSuppression: true,
+                        autoGainControl: true
+                    }
+                });
+            } catch (micErr) {
+                console.error("Microphone Access Error:", micErr);
+                if (micErr.name === 'NotAllowedError' || micErr.name === 'PermissionDeniedError') {
+                    alert("Microphone permission denied! Please check your browser/Teams settings and allow microphone access for this app.");
+                    status.textContent = "Mic Permission Denied";
+                    toggleBtn.disabled = false;
+                    return;
                 }
-            });
+                throw micErr;
+            }
 
             // 2. Get Signed URL (Secure Auth)
             // We call our backend to generate a signed URL using the configured API Key and Agent ID

@@ -35,6 +35,9 @@
     "identity",
     "messageTeamMembers"
   ],
+  "devicePermissions": [
+    "media"
+  ],
   "validDomains": [
     "livechat-c8k0.onrender.com"
   ]
