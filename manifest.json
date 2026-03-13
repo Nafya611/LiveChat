@@ -1,0 +1,41 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.16",
+  "version": "1.0.0",
+  "id": "5e13028d-2946-4447-9758-c77430000000",
+  "packageName": "com.livechat.voice",
+  "developer": {
+    "name": "LiveChat Dev",
+    "websiteUrl": "https://example.com",
+    "privacyUrl": "https://example.com/privacy",
+    "termsOfUseUrl": "https://example.com/terms"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Live Voice Chat",
+    "full": "Live Voice Chat with ElevenLabs"
+  },
+  "description": {
+    "short": "Voice chat powered by ElevenLabs AI",
+    "full": "A real-time voice chat application using ElevenLabs Conversational AI and N8N."
+  },
+  "accentColor": "#0d6efd",
+  "staticTabs": [
+    {
+      "entityId": "chat",
+      "name": "Chat",
+      "contentUrl": "https://example.com/static/index.html",
+      "scopes": ["personal"]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "example.com"
+  ]
+}

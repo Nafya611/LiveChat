@@ -1,0 +1,11 @@
+services:
+  voice-service:
+    build: .
+    container_name: voice-service
+    ports:
+      - "8000:8000"
+    environment:
+      - N8N_URL=${N8N_URL}
+    volumes:
+      - .:/app
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
