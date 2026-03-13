@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kara Live Chat</title>
     <link rel="icon" href="/color.png" type="image/png">
+    <!-- Microsoft Teams JS SDK -->
+    <script src="https://res.cdn.office.net/teams-js/2.19.0/js/MicrosoftTeams.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -78,6 +80,34 @@
     const MUTE_INITIAL_GREETING = false; // Set to true to suppress AI's "Hello! How can I help?"
     let hasReceivedFirstResponse = false; // Flag to track interaction
     let activeAudioSources = 0; // Track how many audio chunks are currently playing
+
+    // --- Teams Integration ---
+    let teamsContext = null;
+
+    if (window.microsoftTeams) {
+        console.log("Initializing Microsoft Teams SDK...");
+        microsoftTeams.app.initialize().then(() => {
+            console.log("Teams SDK Initialized");
+            microsoftTeams.app.getContext().then((context) => {
+                teamsContext = context;
+                console.log("Teams Context:", context);
+                
+                // Update UI with User Name
+                const userName = context.user?.displayName || "Teams User";
+                const header = document.getElementById('header');
+                if (header) {
+                    header.textContent = `Kara Live Chat - Hello, ${userName}`;
+                }
+
+                // Optional: You could send this context to the backend using a hidden message or API call
+                // if the backend supports handling user metadata.
+            }).catch(err => {
+                console.error("Error getting Teams context:", err);
+            });
+        }).catch(err => {
+            console.error("Error initializing Teams SDK:", err);
+        });
+    }
 
     // --- Audio Utils (Base64) ---
     function floatTo16BitPCM(output, offset, input) {
@@ -299,6 +329,23 @@
                 if (staticGreeting) {
                     const row = staticGreeting.closest('.msg-row');
                     if (row) row.remove();
+                }
+
+                // --- TEAMS INTEGRATION: Send User Context to AI ---
+                if (teamsContext && teamsContext.user && teamsContext.user.displayName) {
+                    const userName = teamsContext.user.displayName;
+                    console.log("Sending Teams user context to AI:", userName);
+                    
+                    // We send a text message to the AI to introduce the user.
+                    // This acts as a "System Prompt" via the user channel.
+                    const introMessage = {
+                        text: `Hi, my name is ${userName}.`,
+                        try_trigger_generation: true // Force the AI to acknowledge/reply to this
+                    };
+                    ws.send(JSON.stringify(introMessage));
+                    
+                    // Optional: Visually show this in the chat or keep it hidden. 
+                    // Keeping it hidden makes the AI's "Hello [Name]" seem improved.
                 }
 
                 // Initialize Audio Context for playing and recording

@@ -6,17 +6,17 @@
   "packageName": "com.livechat.voice",
   "developer": {
     "name": "LiveChat Dev",
-    "websiteUrl": "https://example.com",
-    "privacyUrl": "https://example.com/privacy",
-    "termsOfUseUrl": "https://example.com/terms"
+    "websiteUrl": "https://livechat-c8k0.onrender.com",
+    "privacyUrl": "https://livechat-c8k0.onrender.com/privacy",
+    "termsOfUseUrl": "https://livechat-c8k0.onrender.com/terms"
   },
   "icons": {
     "color": "color.png",
     "outline": "outline.png"
   },
   "name": {
-    "short": "Live Voice Chat",
-    "full": "Live Voice Chat with ElevenLabs"
+    "short": "Kara Chat",
+    "full": "Kara Voice Chat"
   },
   "description": {
     "short": "Voice chat powered by ElevenLabs AI",
@@ -27,7 +27,7 @@
     {
       "entityId": "chat",
       "name": "Chat",
-      "contentUrl": "https://example.com/static/index.html",
+      "contentUrl": "https://livechat-c8k0.onrender.com/",
       "scopes": ["personal"]
     }
   ],
@@ -36,6 +36,6 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "example.com"
+    "livechat-c8k0.onrender.com"
   ]
 }
