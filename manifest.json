@@ -5,7 +5,7 @@
   "id": "5e13028d-2946-4447-9758-c77430000000",
   "packageName": "com.livechat.voice",
   "developer": {
-    "name": "LiveChat Dev",
+    "name": "Nafyad Hailu",
     "websiteUrl": "https://livechat-c8k0.onrender.com",
     "privacyUrl": "https://livechat-c8k0.onrender.com/privacy",
     "termsOfUseUrl": "https://livechat-c8k0.onrender.com/terms"
@@ -15,8 +15,8 @@
     "outline": "outline.png"
   },
   "name": {
-    "short": "Kara Chat",
-    "full": "Kara Voice Chat"
+    "short": "Live Chat",
+    "full": "Live Voice Chat"
   },
   "description": {
     "short": "Voice chat powered by ElevenLabs AI",
